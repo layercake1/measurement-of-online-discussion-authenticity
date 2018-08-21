@@ -24,3 +24,5 @@ BibTex:
   * Scikit Learn
   * networkx
   * pandas
+  * flask
+  * flask-sqlalchemy
