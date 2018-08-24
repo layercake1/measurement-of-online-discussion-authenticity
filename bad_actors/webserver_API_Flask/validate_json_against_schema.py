@@ -3,6 +3,8 @@ import sys
 import jsonschema
 from jsonschema import validate
 
+
+
 # Create the schema, as a nested Python dict
 schema = {
     "type": "object",
@@ -60,11 +62,12 @@ data = \
 ]
 
 
-for idx, item in enumerate(data):
-    try:
-        validate(item, schema)
-        sys.stdout.write("Record #{}: OK\n".format(idx))
-    except jsonschema.exceptions.ValidationError as ve:
-        pass
-        sys.stderr.write("Record #{}: ERROR\n".format(idx))
-        sys.stderr.write(str(ve) + "\n")
+def validate_json(schema, json):
+    for idx, item in enumerate(json):
+        try:
+            validate(item, schema)
+            sys.stdout.write("Record #{}: OK\n".format(idx))
+        except jsonschema.exceptions.ValidationError as ve:
+            pass
+            sys.stderr.write("Record #{}: ERROR\n".format(idx))
+            sys.stderr.write(str(ve) + "\n")
