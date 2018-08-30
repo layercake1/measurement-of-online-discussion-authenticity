@@ -2,7 +2,6 @@
 # Created by Aviad on 28-May-16 7:31 PM.
 #
 from __future__ import print_function
-
 from commons.commons import *
 from commons.consts import *
 from commons.method_executor import Method_Executor
@@ -50,7 +49,7 @@ class BadActorsCollector(Method_Executor):
         self._social_network_crawler.crawl_retweeters_by_post_id(self._targeted_twitter_post_ids, are_user_ids, bad_actor_type,
                                                                  bad_actors_collector_inseration_type)
 
-    def mark_missing_bad_retweeters_retrieved_from_vico(self):
+    def mark_missing_bad_retweeters(self):
         print("mark_missing_bad_retweeters_retrieved_from_vico")
         missing_bad_actors = []
         i = 0
