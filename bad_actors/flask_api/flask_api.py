@@ -1,29 +1,23 @@
 from flask import Flask, jsonify, abort, make_response, request
 import sys
-import json
-from flask_sqlalchemy import SQLAlchemy
-
-sys.path.append("C:\Users\leahk\Desktop\measurement-of-online-discussion-authenticity\\bad_actors")
-from configuration.config_class import getConfig
+import os
+import logging.config
 from validate_json import validate_json
+from configuration.config_class import getConfig
 
 
-# config
+
+# setup
+logging.config.fileConfig(getConfig().get("DEFAULT", "Logger_conf_file"))
+logging.info('Setting up API...')
 app = Flask(__name__)
-#config = getConfig()
-#json_file = config.get('Schema', 'json_file')
-json_file = 'configuration/config_api.json'
-with open(json_file, 'r') as f:
-    json_config = json.load(f)
+try:
+    sys.path.append(os.environ['HOME'])
+except KeyError:
+    logging.warn("Can't find environment variable 'HOME'")
 
-schema = json_config['schema']
-print schema
-test_data = [item for item in json_config['test_data']]
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:Aa12345@localhost/campaigns'
-# db = SQLAlchemy(app)
-
-# test-data
+# test-data because the api is not yet connected to a database
 campaigns = [
     {'campaign_id': 100, 'keywords': ['test', 'testing'], 'status': 'finished prediction', 'fake_news_score': 0.5},
     {'campaign_id': 101, 'keywords': ['hello world'], 'status': 'finished prediction', 'fake_news_score': 0.9}
@@ -35,14 +29,26 @@ campaigns = [
 def add_campaign():
     if not request.json:
         abort(400)
-    if not validate_json(request.json, schema):
+    if not validate_json(request.json):
         abort(400)
     campaign = {
         'campaign_id': campaigns[-1]['campaign_id'] + 1,
-        'url': request.json['url']
+        'url': request.json['url'],
+        'author': request.json['author'],
+        'text': request.json['text'],
+        'date': request.json['date'],
+        'retweets': []
     }
+    for retweet in request.json['retweets']:
+        rt = {
+            'url': retweet['url'],
+            'date': retweet['date'],
+            'text': retweet['text'],
+            'author': retweet['author']
+        }
+        campaign['retweets'].append(rt)
     campaigns.append(campaign)
-    return jsonify({'campaign_id': campaign['campaign_id'], 'url': campaign['url']})
+    return jsonify({'campaign_id': campaign['campaign_id']})
 
 
 # check campaign status
@@ -76,5 +82,4 @@ def internal_error(error):
 
 
 if __name__ == '__main__':
-    print sys.path
     app.run(debug=True)

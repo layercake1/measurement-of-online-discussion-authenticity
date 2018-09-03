@@ -54,19 +54,26 @@
       }
     }
   },
-  "test_data": [
-    {
+  "test_data":
+    [{
       "url": "http://test.twitter.com",
         "author": "Pink-Hat",
         "date": "1999-01-11",
         "text": "Testing, testing, 1,2,3",
         "retweets": [{"url": "http://test.twitter.co.uk", "author": "layerCake", "date": "01/09/2017", "text": "hello world"}]
     },
-    {
-      "url": "http://test.twitter.co.uk",
-      "author": 9865, "date": "01/09/2017",
-      "text": "hello world"
-    },
-    {"url": "http://test.twitter.com"}
-  ]
+      {
+        "url": "http://test.twitter.com",
+        "date": "1999-01-11",
+        "text": "Testing, testing, 1,2,3",
+        "retweets": [{"url": "http://test.twitter.co.uk", "author": "layerCake", "date": "01/09/2017", "text": "hello world"}]
+      },
+      {
+        "url": "http://test.twitter.com",
+        "author": "Pink-Hat",
+        "date": "1999-01-11",
+        "text": "hello",
+        "retweets": 98
+      }
+    ]
 }
