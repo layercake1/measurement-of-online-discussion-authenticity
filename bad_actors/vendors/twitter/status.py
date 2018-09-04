@@ -4,8 +4,7 @@ from calendar import timegm
 import rfc822
 import time
 
-from twitter import Hashtag, TwitterError, Url
-import simplejson
+from twitter import simplejson, Hashtag, TwitterError, Url
 
 class Status(object):
   '''A class representing the Status structure used by the twitter API.
