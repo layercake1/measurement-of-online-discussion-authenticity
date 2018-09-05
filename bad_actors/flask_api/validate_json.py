@@ -1,3 +1,5 @@
+from __future__ import print_function
+import sys
 import jsonschema
 import logging.config
 import json
