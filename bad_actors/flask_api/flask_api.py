@@ -5,8 +5,6 @@ import logging.config
 from validate_json import validate_json
 from configuration.config_class import getConfig
 
-
-
 # setup
 logging.config.fileConfig(getConfig().get("DEFAULT", "Logger_conf_file"))
 logging.info('Setting up API...')
