@@ -1,5 +1,5 @@
 #!/usr/bin/env python
- 
+
 from calendar import timegm
 import rfc822
 import time
