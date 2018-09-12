@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, abort, make_response, request
 import sys
-import os
 import logging.config
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from validate_json import validate_json
 from configuration.config_class import getConfig
 
