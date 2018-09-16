@@ -8,6 +8,7 @@ from configuration.config_class import getConfig
 
 
 # setup
+
 logging.config.fileConfig(getConfig().get("DEFAULT", "Logger_conf_file"))
 logging.info('Setting up API...')
 app = Flask(__name__)
@@ -22,6 +23,17 @@ campaigns = [
     {'campaign_id': 100, 'keywords': ['test', 'testing'], 'status': 'finished prediction', 'fake_news_score': 0.5},
     {'campaign_id': 101, 'keywords': ['hello world'], 'status': 'finished prediction', 'fake_news_score': 0.9}
 ]
+
+
+#run the API
+@app.route('/api/v1//analyze')
+def run_api():
+    python_exe = getConfig().get("DEFAULT", "python_exe_path")
+    try:
+        os.system('{} run.py configuration/config.ini'.format(python_exe))
+    except:
+        logging.warn('Unable to run run.py')
+
 
 
 # add campaign to database
