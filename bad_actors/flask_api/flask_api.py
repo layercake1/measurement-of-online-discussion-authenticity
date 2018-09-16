@@ -26,7 +26,7 @@ campaigns = [
 
 
 #run the API
-@app.route('/api/v1//analyze')
+@app.route('/api/v1/analyze')
 def run_api():
     python_exe = getConfig().get("DEFAULT", "python_exe_path")
     try:
